@@ -66,6 +66,51 @@ print(Hello("JhoN")) -- Accessing the Hello function
 Hello, JhoN!
 ```
 
+## Cyclic Modules Problem
+
+Cyclic modules occur when two or more modules depend on each other in a circular fashion. This can lead to errors that are difficult to track down.
+
+> Imagine that you have two modules, `chicken` and `egg`, which depend on each other as follows
+
+```lua
+-- chickenModule.lua
+
+local chicken = {}
+
+local egg = require("eggModule")
+
+return chicken
+```
+
+```lua
+-- eggModule.lua
+
+local egg = {}
+
+local chicken = require("chickenModule")
+
+return egg
+```
+
+```lua
+-- main.lua
+
+local egg = require("eggModule")
+local chicken = require("checkenModule")
+
+print("Which came first, the Egg or the Chicken?")
+```
+
+When trying to run any of these modules, you will receive an error similar to:
+
+```shell
+  stack overflow
+```
+
+This error occurs because both modules directly reference each other, creating an infinite loop that exceeds the stack capacity.
+
+The solution to avoiding cyclic modules is to ensure that your modules do not reference each other circularly. This can be achieved by rethinking your code structure to eliminate this circular dependency
+
 ## Conclusion
 
 In short, Lua modules are a powerful tool for organizing and reusing code effectively.
