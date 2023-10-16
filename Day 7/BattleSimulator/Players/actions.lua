@@ -23,12 +23,12 @@ function actions.build()
       if successHitChance then
         -- Applying the damage
         creatureData.health = creatureData.health - damage
-        print(string.format("🩸 You attacked the creature and dealt %d points of damage! 🩸", damage))
+        print(string.format("🩸 %s attacked the creature and dealt %d points of damage! 🩸", playerData.name, damage))
 
         local healthRate = math.floor((creatureData.health / creatureData.maxHealth) * 10)
         print(string.format("%s: %s", creatureData.name, utils.progressBar(healthRate)))
       else
-        print("😞 You tried to attack but made a miserable mistake! 😞")
+        print(string.format("😞 %s tried to attack but made a miserable mistake! 😞", playerData.name))
       end
     end
   }
@@ -46,7 +46,7 @@ function actions.build()
       -- Recover player life
       local REGEN_POINTS <const> = 5
       playerData.health = math.min(playerData.maxHealth, playerData.health + REGEN_POINTS)
-      print("🧪 You just used a health regeneration potion! 🧪")
+      print(string.format("🧪 %s just used a health regeneration potion! 🧪", playerData.name))
     end
   }
 
