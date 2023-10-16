@@ -59,3 +59,16 @@ while true do
     break
   end
 end
+
+-- Process win and lose conditions
+if player.health <= 0 then
+  print()
+  print("----------------------------------------------------------------------------")
+  print(string.format("😭 %s was not able to win %s, Who knows next time... 😭", player.name, boss.name))
+  print("----------------------------------------------------------------------------")
+elseif boss.health <= 0 then
+  print()
+  print("----------------------------------------------------------------------------")
+  print(string.format("🥳 %s prevailed and won %s, Congratulations 🥳", player.name, boss.name))
+  print("----------------------------------------------------------------------------")
+end
