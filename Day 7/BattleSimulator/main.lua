@@ -1,10 +1,11 @@
 -- Dependencies
-local player = require("definitions.player")
-local colossus = require("BattleSimulator.definitions.Colossus.colossus")
+local player = require("Definitions.Players.player")
+local colossus = require("Definitions.Monsters.colossus")
+local utils = require("utils")
 
-print([[
-⚔️  ＢＡＴＴＬＥ　ＳＩＭＵＬＡＴＯＲ ⚔️
-𝙴𝙼𝙿𝚄𝙽𝙷𝙴 𝚂𝚄𝙰 𝙴𝚂𝙿𝙰𝙳𝙰 𝙴 𝙿𝚁𝙴𝙿𝙰𝚁𝙴-𝚂𝙴 𝙿𝙰𝚁𝙰 𝙻𝚄𝚃𝙰𝚁
-]])
+-- utils.enableUtf8()
+utils.printHeader()
 
 local boss = colossus
+
+utils.printCreature(boss)
