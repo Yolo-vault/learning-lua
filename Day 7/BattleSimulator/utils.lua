@@ -53,4 +53,15 @@ function utils.printCreature(creature)
   print("-------------------------------------------------------------------")
 end
 
+--
+---Asks the user for a number, which is returned by the function
+---@return number
+--
+function utils.ask()
+  io.write("➡️ ")
+
+  local answer = io.read("*n")
+  return answer
+end
+
 return utils

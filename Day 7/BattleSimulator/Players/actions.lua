@@ -1,3 +1,5 @@
+local utils = require("utils")
+
 local actions = {}
 
 function actions.build()
@@ -19,10 +21,12 @@ function actions.build()
 
       -- Print results
       if successHitChance then
-        print(string.format("🩸 You attacked the creature and dealt %d points of damage! 🩸", damage))
-
         -- Applying the damage
         creatureData.health = creatureData.health - damage
+        print(string.format("🩸 You attacked the creature and dealt %d points of damage! 🩸", damage))
+
+        local healthRate = math.floor((creatureData.health / creatureData.maxHealth) * 10)
+        print(string.format("%s: %s", creatureData.name, utils.progressBar(healthRate)))
       else
         print("😞 You tried to attack but made a miserable mistake! 😞")
       end
@@ -48,10 +52,25 @@ function actions.build()
 
   -- Populate list
   actions.list[#actions.list + 1] = swordAttack
+  actions.list[#actions.list + 1] = regenPotion
 end
 
-function actions.getValidActions()
+--
+---Returns the list of valid actions
+---@param playerData table player definition
+---@param creatureData table creature definition
+---@return table
+--
+function actions.getValidActions(playerData, creatureData)
+  local validActions = {}
+  for _, action in pairs(actions.list) do
+    local requirement = action.requirement
+    local isValid = requirement == nil or requirement(playerData, creatureData)
+    if isValid then
+      validActions[#validActions + 1] = action
+    end
+  end
+  return validActions
 end
-
 
 return actions
